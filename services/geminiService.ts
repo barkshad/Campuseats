@@ -7,16 +7,16 @@ Your core mission is to help students eat well within their tight budget (e.g. K
 
 Operational Guidelines:
 1. Always suggest practical, realistic meals for student life (hostel, limited tools).
-2. If the user doesn't provide budget, location, or cooking access, ask politely but concisely.
-3. Use Search and Maps tools to find specific local prices and nearby vendors.
-4. For every meal suggestion, include:
+2. Use Search and Maps tools to find specific local prices and nearby vendors.
+3. For every meal suggestion, include:
    - Price breakdown (KSh)
    - Specific location/vendor type
    - Nutrition note (Protein/Energy balance)
-5. Tone: Calm, supportive, human, practical. No jargon or complex slang. Use short, voice-assistant friendly sentences.`;
+4. Tone: Calm, supportive, human, practical. Use short, voice-assistant friendly sentences.`;
 
 export class GeminiService {
   private getAI() {
+    // Re-instantiate to pick up latest API key if updated via dialog
     return new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
   }
 
@@ -37,7 +37,7 @@ export class GeminiService {
     const ai = this.getAI();
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: `Find the most affordable student-friendly food markets or grocery stores for: ${query}`,
+      contents: `Find affordable student-friendly food markets: ${query}`,
       config: {
         tools: [{ googleMaps: {} }],
         toolConfig: {
@@ -68,7 +68,7 @@ export class GeminiService {
     const ai = this.getAI();
     const response = await ai.models.generateContent({
       model: 'gemini-3-pro-image-preview',
-      contents: { parts: [{ text: `A realistic, appetizing photo of: ${prompt}. Served simply on a student dorm table, natural lighting.` }] },
+      contents: { parts: [{ text: `A realistic student meal: ${prompt}. Dorm setting.` }] },
       config: { imageConfig: { aspectRatio: "1:1", imageSize: "1K" } },
     });
     
