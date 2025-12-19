@@ -1,0 +1,8 @@
+{
+  "name": "CampusEats AI",
+  "description": "A voice-first food budget assistant for university students. Get real-time meal recommendations based on your budget, location, and cooking tools using Gemini Live, Search, and Maps.",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation"
+  ]
+}
